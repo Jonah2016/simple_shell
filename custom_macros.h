@@ -20,7 +20,8 @@
 	"if the input help is - (cd -), the command will be executed\n"\
 	"as cd $OLDPWD.\n\n"
 
-#define EXIT_HELP_MESSAGE "exit=\n"\"exit:\texit [STATUS]\n\n"\
+#define EXIT_HELP_MESSAGE "exit=\n"\
+	"exit:\texit [STATUS]\n\n"\
 	"Exiting the simple-shell app.\n\n"\
 	"Exits the custom shell with a status of N. If N is omitted, \n"\
 	"the exit status is that of the last command executed.\n\n"
