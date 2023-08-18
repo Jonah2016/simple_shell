@@ -6,19 +6,19 @@
  */
 int execute(application_data *data)
 {
-	int retval = 0, status;
+	int responseval = 0, status;
 	pid_t pidd;
 
 	/* check for program in built ins */
-	retval = list_built_ins(data);
-	if (retval != -1)/* if program was found in built ins */
-		return (retval);
+	responseval = list_built_ins(data);
+	if (responseval != -1)/* if program was found in built ins */
+		return (responseval);
 
 	/* check for program file system */
-	retval = application_finder(data);
-	if (retval)
+	responseval = application_finder(data);
+	if (responseval)
 	{/* if program not found */
-		return (retval);
+		return (responseval);
 	}
 	else
 	{/* if program was found */
@@ -30,8 +30,8 @@ int execute(application_data *data)
 		}
 		if (pidd == 0)
 		{/* I am the child process, I execute the program*/
-			retval = execve(data->tokens[0], data->tokens, data->env);
-			if (retval == -1) /* if error when execve*/
+			responseval = execve(data->tokens[0], data->tokens, data->env);
+			if (responseval == -1) /* if error when execve*/
 				perror(data->command_name), exit(EXIT_FAILURE);
 		}
 		else
@@ -45,4 +45,3 @@ int execute(application_data *data)
 	}
 	return (0);
 }
-
