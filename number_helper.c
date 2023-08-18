@@ -1,8 +1,8 @@
 #include "shell.h"
 
 /**
- * lng_to_str - convert the numb to a str.
- * @number: num to be converted in an str.
+ * lng_to_str - convert the num to a str.
+ * @number: num to be converten in an str.
  * @string: buff to save the num as str.
  * @base: base to convert num
  *
@@ -10,28 +10,28 @@
  */
 void lng_to_str(long number, char *string, int base)
 {
-	int index = 0, inNegative = 0;
-	long cociente = number;
-	char letters[] = {"0123456789abcdef"};
+	int ind = 0, inNeg = 0;
+	long quotient = number;
+	char alphabets[] = {"0123456789abcdef"};
 
-	if (cociente == 0)
-		string[index++] = '0';
+	if (quotient == 0)
+		string[ind++] = '0';
 
 	if (string[0] == '-')
-		inNegative = 1;
+		inNeg = 1;
 
-	while (cociente)
+	while (quotient)
 	{
-		if (cociente < 0)
-			string[index++] = letters[-(cociente % base)];
+		if (quotient < 0)
+			string[ind++] = alphabets[-(quotient % base)];
 		else
-			string[index++] = letters[cociente % base];
-		cociente /= base;
+			string[ind++] = alphabets[quotient % base];
+		quotient /= base;
 	}
-	if (inNegative)
-		string[index++] = '-';
+	if (inNeg)
+		string[ind++] = '-';
 
-	string[index] = '\0';
+	string[ind] = '\0';
 	str_reversal(string);
 }
 
@@ -45,7 +45,7 @@ int _atoi(char *s)
 {
 	int symbol = 1;
 	unsigned int number = 0;
-	/*1- analisys symbol*/
+	/*1- analysis symbol*/
 	while (!('0' <= *s && *s <= '9') && *s != '\0')
 	{
 		if (*s == '-')
@@ -55,7 +55,7 @@ int _atoi(char *s)
 		s++;
 	}
 
-	/*2 - extract the number */
+	/*2 - extracting the number */
 	while ('0' <= *s && *s <= '9' && *s != '\0')
 	{
 
@@ -68,19 +68,18 @@ int _atoi(char *s)
 /**
  * chars_counter - count the coincidences of character in string.
  *
- * @string: pnt to str origin.
- * @character: str with  chars to be counted
+ * @string: pointer to string origin.
+ * @character: str with  characters to be counted
  * Return: int of the str or 0 value.
  */
 int chars_counter(char *string, char *character)
 {
-	int i = 0, counter = 0;
+	int i = 0, cnt = 0;
 
 	for (; string[i]; i++)
 	{
 		if (string[i] == character[0])
-			counter++;
+			cnt++;
 	}
-	return (counter);
+	return (cnt);
 }
-
