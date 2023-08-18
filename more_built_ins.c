@@ -13,7 +13,7 @@ int built_in_exit(application_data *data)
 	{ /*if exists arg for exit, check if is a number*/
 		for (i = 0; data->tokens[1][i]; i++)
 			if ((data->tokens[1][i] < '0' || data->tokens[1][i] > '9')
-					&& data->tokens[1][i] != '+')
+			&& data->tokens[1][i] != '+')
 			{ /*if is not a number*/
 				errno = 2;
 				return (2);
@@ -32,7 +32,7 @@ int built_in_exit(application_data *data)
 int built_in_cd(application_data *data)
 {
 	char *home_directory = env_get_key("HOME", data), *dir_old = NULL;
-	char old_dir[128] = {0};
+	char prev_dir[128] = {0};
 	int error_code = 0;
 
 	if (data->tokens[1])
@@ -55,7 +55,7 @@ int built_in_cd(application_data *data)
 	else
 	{
 		if (!home_directory)
-			home_directory = getcwd(old_dir, 128);
+			home_directory = getcwd(prev_dir, 128);
 
 		return (set_wrkn_dir(data, home_directory));
 	}
@@ -63,19 +63,19 @@ int built_in_cd(application_data *data)
 }
 
 /**
- * set_wrkn_dir - set the working dir
+ * set_work_dir - set the working dir
  * @data: struct for the program's data
  * @new_dir: path to be set as work directory
  * Return: 0 if successful, or other num if declared in the args
  */
 int set_wrkn_dir(application_data *data, char *new_dir)
 {
-	char old_dir[128] = {0};
+	char prev_dir[128] = {0};
 	int err_code = 0;
 
-	getcwd(old_dir, 128);
+	getcwd(prev_dir, 128);
 
-	if (!str_compare(old_dir, new_dir, 0))
+	if (!str_compare(prev_dir, new_dir, 0))
 	{
 		err_code = chdir(new_dir);
 		if (err_code == -1)
@@ -85,26 +85,26 @@ int set_wrkn_dir(application_data *data, char *new_dir)
 		}
 		env_set_key("PWD", new_dir, data);
 	}
-	env_set_key("OLDPWD", old_dir, data);
+	env_set_key("OLDPWD", prev_dir, data);
 	return (0);
 }
 
 /**
- * list_built_inshelp - shows the env where the shell runs
+ * list_built_inshelp - shows the env, the shell runs
  * @data: struct for the prog data
- * Return: 0 if sucessfull, or other num if its declared in the args
+ * Return: 0 if sucessfull, or  num if its declared in the args
  */
 int list_built_inshelp(application_data *data)
 {
 	int i, length = 0;
-	char *mensajes[6] = {NULL};
+	char *messengers[6] = {NULL};
 
-	mensajes[0] = HELP_MESSAGE;
+	messengers[0] = HELP_MESSAGE;
 
 	/* validate args */
 	if (data->tokens[1] == NULL)
 	{
-		_print(mensajes[0] + 6);
+		_print(messengers[0] + 6);
 		return (1);
 	}
 	if (data->tokens[2] != NULL)
@@ -113,18 +113,18 @@ int list_built_inshelp(application_data *data)
 		perror(data->command_name);
 		return (5);
 	}
-	mensajes[1] = EXIT_HELP_MESSAGE;
-	mensajes[2] = ENV_HELP_MESSAGE;
-	mensajes[3] = SET_ENV_HELP_MESSAGE;
-	mensajes[4] = UNSET_ENV_HELP_MESSAGE;
-	mensajes[5] = CD_HELP_MESSAGE;
+	messengers[1] = EXIT_HELP_MESSAGE;
+	messengers[2] = ENV_HELP_MESSAGE;
+	messengers[3] = SET_ENV_HELP_MESSAGE;
+	messengers[4] = UNSET_ENV_HELP_MESSAGE;
+	messengers[5] = CD_HELP_MESSAGE;
 
-	for (i = 0; mensajes[i]; i++)
+	for (i = 0; messengers[i]; i++)
 	{
 		length = str_length(data->tokens[1]);
-		if (str_compare(data->tokens[1], mensajes[i], length))
+		if (str_compare(data->tokens[1], messengers[i], length))
 		{
-			_print(mensajes[i] + length + 1);
+			_print(messengers[i] + length + 1);
 			return (1);
 		}
 	}
@@ -157,4 +157,3 @@ int built_in_alias(application_data *data)
 
 	return (0);
 }
-
