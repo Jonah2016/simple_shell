@@ -63,7 +63,7 @@ int built_in_cd(application_data *data)
 }
 
 /**
- * set_work_dir - set the working dir
+ * set_wrkn_dir - set the working dir
  * @data: struct for the program's data
  * @new_dir: path to be set as work directory
  * Return: 0 if successful, or other num if declared in the args
