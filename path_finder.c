@@ -82,8 +82,6 @@ char **make_token_path(application_data *data)
 
 	/* reserve space for the array of pointers */
 	tokens = malloc(sizeof(char *) * counter_dirs);
-	if (tokens == NULL)
-		return (2);
 
 	/*make_token and duplicate each token of path*/
 	i = 0;
