@@ -109,7 +109,7 @@ char *str_concatination(char *str1, char *str2)
 	len2 = str_length(str2);
 
 	res = malloc(sizeof(char) * (len1 + len2 + 1));
-	if (res == NULL || res == '\0')
+	if (res == NULL)
 	{
 		errno = ENOMEM;
 		perror("Error");
