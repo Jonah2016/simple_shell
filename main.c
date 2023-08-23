@@ -68,8 +68,6 @@ void init_data(application_data *data, int argc, char *argv[], char **env)
 	}
 	data->tokens = NULL;
 	data->env = malloc(sizeof(char *) * 50);
-	if (data->env == NULL)
-		exit(1);
 	if (env)
 	{
 		for (; env[i]; i++)
@@ -81,10 +79,10 @@ void init_data(application_data *data, int argc, char *argv[], char **env)
 	env = data->env;
 
 	data->alias_list = malloc(sizeof(char *) * 20);
-	if (data->alias_list == NULL)
-		exit(1);
 	for (i = 0; i < 20; i++)
+	{
 		data->alias_list[i] = NULL;
+	}
 }
 /**
  * sisifo - an infinite loop that displays the prompt
