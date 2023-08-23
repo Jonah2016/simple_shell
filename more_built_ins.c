@@ -20,6 +20,7 @@ int built_in_exit(application_data *data)
 			}
 		errno = _atoi(data->tokens[1]);
 	}
+	all_data_freer(data);
 	exit(errno);
 }
 
