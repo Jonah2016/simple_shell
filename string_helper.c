@@ -33,7 +33,7 @@ char *str_dupl(char *string)
 
 	len = str_length(string) + 1;
 
-	res = malloc(sizeof(char) * len);
+	res = malloc(sizeof(char) * (len + 1));
 
 	if (res == NULL)
 	{
